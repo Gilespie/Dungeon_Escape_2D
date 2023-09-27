@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _speedMovement = 3f;
     [SerializeField] private float _powerJump = 5f;
+    [SerializeField] private int _diamondCount = 0;
+    public int Health { get; set; }
 
     private float _rayDistance = 0.6f;
     private bool _isGrounded = false;
@@ -27,8 +29,24 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Movement();
-
         Attack();
+    }
+
+    public void Damage()
+    {
+        Health--;
+
+        if (Health == 0)
+        {
+            _playerAnimation.Death();
+        }
+    }
+
+    public void CollectDiamon(int amount)
+    {
+        if (amount <= 0) return;
+
+        _diamondCount += amount;
     }
 
     private void Movement()
