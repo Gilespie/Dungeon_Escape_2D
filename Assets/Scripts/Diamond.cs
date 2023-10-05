@@ -12,7 +12,7 @@ public class Diamond : MonoBehaviour
 
             if(player != null)
             {
-                player.CollectDiamon(_gemCount);
+                player.AddDiamond(_gemCount);
                 Destroy(gameObject);
             }
         }
